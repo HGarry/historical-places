@@ -14,36 +14,33 @@ function Card({ item }) {
   };
 
   return (
-    <div className="p-6 bg-yellow-50 rounded-2xl text-center">
-      <img
-        src={image}
-        alt={name}
-        className="aspect-4/2 object-cover w-full rounded-xl"
-      />
-      <h2 className="font-bold mt-3 text-xl">{name}</h2>
-      {id && <p className="text-gray-600 mt-2 mb-3">{description}</p>}{" "}
-      <h5 className="text-sm text-red-400 mt-2 mb-3 font-bold">
-        {visited ? "Visited" : "Not Visited"}
-      </h5>
-      <div
-        className={
-          !id
-            ? "flex justify-between items-center gap-2 mt-2"
-            : "flex justify-center mt-2"
-        }
-      >
-        <Button
+    <div className="p-6 bg-yellow-50 rounded-2xl text-center flex flex-col justify-between h-full">
+      <div>
+        <img src={image} alt={name} className="aspect-4/2 object-cover w-full rounded-xl" />
+        <h2 className="font-bold mt-3 text-xl">{name}</h2>
+        
+        {/* Description shows ONLY on details page */}
+        {id && <p className="text-gray-700 text-sm mt-1">{description}</p>}
+
+        <h5 className="text-sm text-red-400 mt-2 font-bold">
+          {visited ? 'Visited' : 'Not Visited'}
+        </h5>
+      </div>
+
+      {/* Buttons remain side-by-side on one line without text wrapping */}
+      <div className={!id ? "flex justify-between items-center gap-1.5 mt-4" : "flex justify-center mt-4"}>
+        <Button 
           onClick={handleMarkUnMark}
-          className="flex-1 text-xs sm:text-sm px-2 py-2 whitespace-nowrap"
+          className="text-xs sm:text-sm px-2.5 sm:px-3 py-2 whitespace-nowrap"
         >
           <i className="fa-solid fa-location-pin mr-1"></i>
-          {visited ? "Unmark as Visited" : "Mark as Visited"}
+          {visited ? 'Unmark Visited' : 'Mark as Visited'}
         </Button>
 
         <Activity mode={!id ? "visible" : "hidden"}>
-          <Link to={`/place/${item.id}`} className="flex-1">
-            <Button className="bg-amber-300 w-full text-xs sm:text-sm px-2 py-2 whitespace-nowrap">
-              Details
+          <Link to={`/place/${item.id}`}>
+            <Button className="text-xs sm:text-sm px-2.5 sm:px-3 py-2 whitespace-nowrap">
+              View Details
               <i className="fa-solid fa-arrow-right ml-1"></i>
             </Button>
           </Link>
